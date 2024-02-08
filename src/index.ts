@@ -1,4 +1,5 @@
-import { Feed } from '@damm_systems/feed';
+import { Feed } from '@peertube/feed';
+import sizeOf from 'image-size';
 
 export interface Env {}
 
@@ -116,17 +117,22 @@ export default {
 		});
 
 		let rawPatchnotes: RawPatchnotes = await (await fetch(LAUNCHER_BASE_URL + '/v2/javaPatchNotes.json')).json();
-		for (const entry of rawPatchnotes.entries.slice(0, 10)) {
+		for (const entry of rawPatchnotes.entries.slice(0, 5)) {
 			const patchnotes = await getPatchnotes(entry);
 			const url = `https://quiltmc.org/en/mc-patchnotes/#${patchnotes.version}`;
+			const image = await fetch(patchnotes.image.url);
+			const size = sizeOf(new Uint8Array(await image.arrayBuffer()));
 			feed.addItem({
 				title: patchnotes.title,
 				id: url,
 				link: url,
-				image: {
-					url: patchnotes.image.url,
-					type: 'image/' + patchnotes.image.url.split(/[#?]/)[0].split('.').pop()!.trim().replace('jpg', 'jpeg'),
-				},
+				thumbnails: [
+					{
+						url: patchnotes.image.url,
+						width: size.width!,
+						height: size.height!,
+					},
+				],
 				content: patchnotes.body,
 				date: new Date(patchnotes.time),
 			});

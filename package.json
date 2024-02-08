@@ -13,6 +13,7 @@
     "wrangler": "^3.0.0"
   },
   "dependencies": {
-    "@damm_systems/feed": "^4.4.1"
+    "@peertube/feed": "^5.1.1",
+    "image-size": "^1.1.1"
   }
 }
