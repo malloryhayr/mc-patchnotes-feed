@@ -1,5 +1,4 @@
 import { Feed } from '@peertube/feed';
-import sizeOf from 'image-size';
 
 export interface Env {}
 
