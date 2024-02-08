@@ -120,21 +120,12 @@ export default {
 		for (const entry of rawPatchnotes.entries.slice(0, 5)) {
 			const patchnotes = await getPatchnotes(entry);
 			const url = `https://quiltmc.org/en/mc-patchnotes/#${patchnotes.version}`;
-			const image = await fetch(patchnotes.image.url);
-			const size = sizeOf(new Uint8Array(await image.arrayBuffer()));
+			const image = `<img src="${patchnotes.image.url}" alt="${patchnotes.title}">`;
 			feed.addItem({
 				title: patchnotes.title,
 				id: patchnotes.id,
 				link: url,
-				thumbnails: [
-					{
-						url: patchnotes.image.url,
-						width: size.width!,
-						height: size.height!,
-					},
-				],
-				image: patchnotes.image,
-				content: patchnotes.body,
+				content: image + patchnotes.body,
 				date: new Date(patchnotes.time),
 			});
 		}
