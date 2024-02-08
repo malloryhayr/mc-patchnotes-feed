@@ -123,7 +123,10 @@ export default {
 				title: patchnotes.title,
 				id: url,
 				link: url,
-				image: patchnotes.image,
+				image: {
+					url: patchnotes.image.url,
+					type: 'image/' + patchnotes.image.url.split(/[#?]/)[0].split('.').pop()!.trim(),
+				},
 				content: patchnotes.body,
 				date: new Date(patchnotes.time),
 			});
