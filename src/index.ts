@@ -92,7 +92,7 @@ async function getPatchnotes(raw: RawPatchnotesEntry): Promise<PatchnotesEntry> 
 
 	return {
 		title: content.title,
-		time: meta.time,
+		time: meta.releaseTime,
 		version: meta.id,
 		type: raw.type,
 		image: {
