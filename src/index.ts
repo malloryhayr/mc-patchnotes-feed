@@ -1,4 +1,4 @@
-import { Feed } from 'feed';
+import { Feed } from '@damm_systems/feed';
 
 export interface Env {}
 
@@ -123,9 +123,9 @@ export default {
 				title: patchnotes.title,
 				id: url,
 				link: url,
+				image: patchnotes.image,
 				content: patchnotes.body,
 				date: new Date(patchnotes.time),
-				image: patchnotes.image,
 			});
 		}
 		return new Response(feed.rss2(), {
