@@ -126,21 +126,26 @@ export default {
 				title: patchnotes.title,
 				id: url,
 				link: url,
-				thumbnails: [
-					{
-						url: patchnotes.image.url,
-						width: size.width!,
-						height: size.height!,
-					},
-				],
+				image: patchnotes.image,
 				content: patchnotes.body,
 				date: new Date(patchnotes.time),
 			});
 		}
-		return new Response(feed.rss2(), {
-			headers: {
-				'content-type': 'application/rss+xml',
-			},
-		});
+		switch (new URL(request.url).pathname) {
+			case '/json': {
+				return new Response(feed.json1(), {
+					headers: {
+						'content-type': 'application/json',
+					},
+				});
+			}
+			default: {
+				return new Response(feed.rss2(), {
+					headers: {
+						'content-type': 'application/rss+xml',
+					},
+				});
+			}
+		}
 	},
 };
