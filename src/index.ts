@@ -125,7 +125,7 @@ export default {
 				link: url,
 				image: {
 					url: patchnotes.image.url,
-					type: 'image/' + patchnotes.image.url.split(/[#?]/)[0].split('.').pop()!.trim(),
+					type: 'image/' + patchnotes.image.url.split(/[#?]/)[0].split('.').pop()!.trim().replace('jpg', 'jpeg'),
 				},
 				content: patchnotes.body,
 				date: new Date(patchnotes.time),
