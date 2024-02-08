@@ -110,7 +110,7 @@ export default {
 			title: 'Minecraft Patch Notes',
 			description: 'Patch notes for Minecraft: Java Edition',
 			id: 'https://' + new URL(request.url).host + '/',
-			link: 'https://quiltmc.org/en/mc-patchnotes/',
+			link: 'https://www.minecraft.net/en-us/articles',
 			language: 'en',
 			favicon: 'https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/favicon.ico',
 			copyright: `All rights reserved 2009-${new Date().getFullYear()}, Mojang`,
@@ -124,8 +124,15 @@ export default {
 			const size = sizeOf(new Uint8Array(await image.arrayBuffer()));
 			feed.addItem({
 				title: patchnotes.title,
-				id: url,
+				id: patchnotes.id,
 				link: url,
+				thumbnails: [
+					{
+						url: patchnotes.image.url,
+						width: size.width!,
+						height: size.height!,
+					},
+				],
 				image: patchnotes.image,
 				content: patchnotes.body,
 				date: new Date(patchnotes.time),
